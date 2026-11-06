@@ -39,7 +39,7 @@ button:disabled {
 .city-background {
   position: absolute;
   inset: 0;
-  background-image: url("/image/homepage.png");
+  background-image: url("/image/homepage_blue.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -264,6 +264,15 @@ button:disabled {
   background: #31594f;
 }
 
+/* Shared layout for the Chapter Hub and story screens. */
+.hub-screen,
+.chapter-screen {
+  min-height: 100vh;
+  min-height: 100svh;
+  background:
+    linear-gradient(rgb(244 239 223 / 94%), rgb(244 239 223 / 97%)),
+    url("/image/homepage_blue.png") center / cover fixed;
+}
 
 /* The hub stays inside the game viewport; only its chapter list can scroll. */
 .hub-screen {
@@ -1123,4 +1132,76 @@ button:disabled {
     gap: 16px;
     overflow-x: auto;
   }
+}
+
+/* CLASS 7: Keep every card and action reachable inside the fixed game screen. */
+.chapter-stage--policy {
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  scrollbar-gutter: stable;
+  box-sizing: border-box;
+  width: min(100% - 32px, 1180px);
+  padding: 12px 20px 28px;
+}
+.policy-desk { width: 100%; margin: 0 auto; text-align: center; }
+.policy-desk__heading .screen-eyebrow, .policy-decree .screen-eyebrow { color: #d3b36d; }
+.policy-desk__heading h1 { margin: 6px 0; font: 400 clamp(1.7rem, 3vw, 2.3rem) Baskerville, Georgia, serif; }
+.policy-desk__heading > p:last-child { color: #c4c5b6; margin: 8px 0 16px; font-size: .88rem; }
+.policy-hand { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 12px 4px; align-items: stretch; }
+.policy-playing-card { display: flex; flex-direction: column; min-width: 0; padding: 10px; border: 7px solid #dfdfc8; border-radius: 17px; background: #b09d60; color: #241f14; text-align: left; font: inherit; cursor: pointer; box-shadow: 0 10px 22px #0006; transition: transform .18s ease, box-shadow .18s ease; }
+.policy-playing-card:first-child { transform: rotate(-1deg); }
+.policy-playing-card:last-child { transform: rotate(1deg); }
+.policy-playing-card:hover { transform: translateY(-5px); }
+.policy-playing-card[aria-pressed="true"] { transform: translateY(-5px); border-color: #f7e4a7; box-shadow: 0 0 0 3px #bc9140, 0 14px 28px #0008; }
+.policy-card__top { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; padding: 0 2px 8px; }
+.policy-card__art { display: block; height: 120px; border: 1px solid #403821; overflow: hidden; background: #827448; }
+.policy-card__art img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; filter: sepia(.7) saturate(.55) contrast(1.08); }
+.policy-card__title { display: block; min-height: 2.4em; margin: 12px 0 8px; font: 600 clamp(1.15rem, 1.7vw, 1.45rem)/1.2 Baskerville, Georgia, serif; }
+.policy-card__description { display: block; font-size: .87rem; line-height: 1.45; margin-bottom: 12px; }
+.policy-card__tradeoff { display: block; margin-top: auto; padding: 10px; background: #e8e3cb; border: 1px solid #53492d; font-size: .78rem; line-height: 1.45; }
+.policy-card__tradeoff strong { display: block; margin-bottom: 4px; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+.policy-card__pick { display: block; margin-top: 10px; padding: 9px 4px; background: #29271b; color: #f5ecd0; text-align: center; font-size: .74rem; font-weight: 700; }
+.policy-playing-card[aria-pressed="true"] .policy-card__pick { background: #244838; color: #fff3c9; }
+.policy-signing { display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.policy-signing p { margin: 0; color: #ddd9c9; font-size: .85rem; }
+.policy-back { display: inline-block; margin-top: 16px; color: #ccc6b1; }
+.policy-decree { max-width: 580px; margin: 24px auto; padding: 28px; border: 1px solid #c2a15c; border-radius: 12px; background: #26372f; line-height: 1.6; }
+.policy-decree h2 { font: 400 1.8rem/1.2 Baskerville, Georgia, serif; }
+.policy-seal { display: grid; place-items: center; width: 64px; height: 64px; margin: 20px auto; border: 2px solid #c2a15c; border-radius: 50%; color: #d3b36d; font-size: 2rem; }
+.policy-desk button:focus-visible { outline: 3px solid #fff3ba; outline-offset: 5px; }
+@media (max-width: 760px) {
+  .chapter-stage--policy { width: 100%; padding: 12px 22px 32px; }
+  .policy-hand { grid-template-columns: 1fr; max-width: 400px; margin: auto; gap: 20px; }
+  .policy-playing-card:first-child, .policy-playing-card:last-child { transform: none; }
+  .policy-card__title { min-height: 0; font-size: 1.5rem; }
+  .policy-card__art { height: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .policy-playing-card { transition: none; }
+}
+
+/* CLASS 7: Keep result feedback readable within the existing scrolling policy stage. */
+.policy-result { max-width: 720px; }
+.policy-result h1 { font: 400 clamp(1.8rem, 3vw, 2.5rem)/1.2 Baskerville, Georgia, serif; }
+.policy-result h2 { font-size: 1.3rem; }
+.policy-result__choice { color: #e0c788; }
+.policy-result__changes { padding: 0; list-style: none; }
+.policy-result__changes li { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid #526154; }
+.policy-result__changes strong { text-align: right; color: #e0c788; }
+@media (max-width: 480px) {
+  .policy-result { padding: 18px; }
+  .policy-result__changes li { gap: 6px; font-size: 0.85rem; }
+}
+
+/* CLASS 7: The signed decree uses the canal as its backdrop, with a readable overlay. */
+.chapter-screen--result {
+  background:
+    linear-gradient(rgb(15 27 24 / 55%), rgb(15 27 24 / 75%)),
+    url("/images/chapter1/shantang-canal.webp") center / cover no-repeat;
+}
+.chapter-screen--result .policy-result {
+  background: rgb(28 45 37 / 90%);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 30%);
 }

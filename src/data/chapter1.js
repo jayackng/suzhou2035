@@ -59,9 +59,15 @@ export const characters = {
     imageAlt: "Portrait of Mr. Feng, the factory owner",
     // A short summary of the concern he represents.
     perspective: "Industrial growth · Forty proposed jobs",
-    // Class 5 displays one representative line instead of a dialogue array.
-    dialogue:
-      "This expansion means forty new jobs for this district. Why should we be held back for a canal that's going to change anyway?",
+    // CLASS 6: Store dialogue lines in an array; DialogueCard reads them in order.
+    dialogue: [
+      "This expansion means forty new jobs for this district.",
+      "Why should we be held back for a canal that's going to change anyway?",
+      // CLASS 6: Three teaching lines extend the original dialogue above.
+      "Those jobs could help local families build a future here. That matters to this district too.",
+      "Cleaner equipment costs money. If you ask us to upgrade, we need time to plan how to pay for it.",
+      "I understand that people are worried about the water. Give us clear rules and a realistic timeline, so we can protect jobs while making improvements.",
+    ],
   },
 
   // Data for the local resident's interview.
@@ -71,17 +77,73 @@ export const characters = {
     image: "/images/chapter1/auntie-lin.webp",
     imageAlt: "Portrait of Auntie Lin, a lifelong canal-side fisher",
     perspective: "Water quality · Community trust",
-    dialogue:
-      "My family has fished this water for three generations. It's not the same water it was ten years ago.",
+    // CLASS 6: The same DialogueCard can read another character's dialogue array.
+    dialogue: [
+      "My family has fished this water for three generations.",
+      "It's not the same water it was ten years ago.",
+      // CLASS 6: Three teaching lines extend the original dialogue above.
+      "We bring home fewer fish now. When the catch gets smaller, families like mine feel the difference at the dinner table.",
+      "I know the factory provides jobs. But fishing is work too, and our work depends on clean water.",
+      "Before you approve more growth, tell us how the canal will be protected and how we will know the water is getting better. We need more than a promise.",
+    ],
   },
 };
 
 // StatusMeters maps over this array and creates one meter for each object.
-// These values are display-only in Class 5, so no update logic exists yet.
+// CLASS 7: These starting values also reset the chapter for a new playthrough.
 export const startingMeters = [
   // Each object has a label and a percentage value.
   { name: "Environment", value: 62 },
   { name: "Economy", value: 55 },
   { name: "Heritage", value: 58 },
   { name: "Public", value: 48 },
+];
+
+// CLASS 6: Teaching choices store content as data; each id identifies one policy.
+export const policyChoices = [
+  {
+    id: "approve",
+    // CLASS 7: Teaching values describe each policy's trade-offs; Heritage stays unchanged.
+    effects: { environment: -15, economy: 20, public: -5 },
+    // CLASS 7: Result content belongs to the policy data.
+    result: {
+      headline: "Factory expansion moves forward",
+      summary: "The council approves expansion under current requirements. New jobs boost the economy, while unresolved runoff concerns weaken environmental health and public confidence.",
+    },
+    image: "/images/chapter1/mr-feng.webp",
+    priority: "Jobs & growth",
+    title: "Approve the expansion",
+    description: "Allow the factory to expand under the current requirements.",
+    tradeoff: "Prioritizes the proposed jobs, but leaves residents' water concerns unresolved.",
+  },
+  {
+    id: "conditional",
+    // CLASS 7: Teaching values describe each policy's trade-offs; Heritage stays unchanged.
+    effects: { environment: 10, economy: 5, public: 5 },
+    // CLASS 7: Result content belongs to the policy data.
+    result: {
+      headline: "Cleaner growth receives council approval",
+      summary: "Expansion can proceed with cleaner equipment and water monitoring. Safeguards improve confidence and environmental health, while upgrade costs limit immediate economic gains.",
+    },
+    image: "/images/chapter1/shantang-canal.webp",
+    priority: "Growth & safeguards",
+    title: "Approve with environmental conditions",
+    description: "Require cleaner equipment and a water-monitoring plan before expansion begins.",
+    tradeoff: "Supports growth with safeguards, but adds costs and may delay hiring.",
+  },
+  {
+    id: "pause",
+    // CLASS 7: Teaching values describe each policy's trade-offs; Heritage stays unchanged.
+    effects: { environment: 15, economy: -10, public: 5 },
+    // CLASS 7: Result content belongs to the policy data.
+    result: {
+      headline: "Canal investigation comes first",
+      summary: "The council pauses expansion to investigate water quality. Reduced pressure on the canal and attention to residents improve the outlook, but delayed jobs weigh on the economy.",
+    },
+    image: "/images/chapter1/auntie-lin.webp",
+    priority: "Water investigation",
+    title: "Pause the expansion",
+    description: "Delay approval while the city investigates canal water quality.",
+    tradeoff: "Prioritizes investigation, but postpones the proposed jobs and creates uncertainty for the factory.",
+  },
 ];
