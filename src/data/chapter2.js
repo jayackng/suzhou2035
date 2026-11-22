@@ -1,58 +1,60 @@
 // CLASS 8: Chapter 2 uses exactly the same shape as chapter1.js.
+// Follows the Part B plan: visit a resident's home, review a renovation proposal,
+// talk to a heritage officer and a longtime resident.
 // DRAFT CONTENT: replace the story, characters, policies and images with your own.
 const chapter2 = {
   id: 2,
   title: "Old Town & Heritage",
 
   report: {
-    title: "Historic District Survey",
+    title: "Renovation Proposal",
     summary:
-      "The lanes of Pingjiang old town still hold hundreds of courtyard homes, but many are damp, crowded or empty, and the cost of repairing them keeps rising.",
+      "A developer has proposed modernizing forty courtyard homes in the old town with new plumbing, wiring and insulation. Residents want safer homes, but the proposal would also remove carved beams, stone thresholds and shared courtyards.",
     findings: [
       { label: "One in four", text: "courtyard homes now vacant or unsafe to live in" },
+      { label: "Forty homes", text: "included in the proposed renovation" },
       { label: "Two years", text: "of rising rents on renovated shopfronts" },
-      { label: "Six workshops", text: "of traditional craftspeople closed since last spring" },
     ],
     note:
-      "Pingjiang's lanes are where Suzhou's past is still visible. Walk the old town and listen to the people who live there before deciding how it should change.",
+      "The old town is where Suzhou's past is still visible. Visit a resident's home and hear from the people involved before deciding how it should change.",
   },
 
   scene: {
-    title: "Pingjiang Lane",
-    location: "Old town · Field observation",
-    image: "/images/chapter2/pingjiang-lane.webp",
-    imageAlt: "A narrow stone lane in Pingjiang old town with whitewashed walls and dark tiled roofs",
+    title: "Shen Family Courtyard",
+    location: "Old town · Resident's home",
+    image: "/images/chapter2/resident-home.webp",
+    imageAlt: "A courtyard home in Suzhou's old town with carved wooden windows and a tiled roof",
     observation:
-      "Fresh glass storefronts sit beside cracked plaster walls. Some doorways hold lanterns and laundry lines, others are boarded up. A neon sign is the brightest thing on the lane, and most of the old signboards are gone.",
+      "The courtyard has carved window screens and a stone well, but the kitchen wall is damp and the wiring is bare. A space heater sits next to a hundred-year-old beam. The family wants a warmer house, and they want to keep the courtyard.",
   },
 
   characters: [
     {
       name: "Ms. Zhou",
-      role: "Renovation Developer",
+      role: "Heritage Officer",
       image: "/images/chapter2/ms-zhou.webp",
-      imageAlt: "Portrait of Ms. Zhou, a renovation developer",
-      perspective: "Modernization · Safer homes",
+      imageAlt: "Portrait of Ms. Zhou, a heritage officer",
+      perspective: "Preservation · Protected features",
       dialogue: [
-        "Many of these houses have no proper plumbing and a roof that leaks every spring.",
-        "People deserve a safe home, even if it is a hundred years old.",
-        "Modern wiring and insulation cost money. Shops and cafes are what pay for that.",
-        "If the old town stays frozen, it becomes a museum with nobody living in it.",
-        "Let us renovate with a clear plan. Safe homes and a lively street can go together.",
+        "Every house in this lane has features that cannot be replaced once they are gone.",
+        "That carved beam took a craftsman months. A contractor could remove it in an afternoon.",
+        "I understand that families want modern comforts. I want that for them too.",
+        "But full modernization often means gutting a house and keeping only the outside wall.",
+        "Let us repair with care, and keep the parts that make this place Suzhou.",
       ],
     },
     {
       name: "Grandpa Shen",
-      role: "Retired Woodcarver · Lifelong lane resident",
+      role: "Longtime Resident · Retired woodcarver",
       image: "/images/chapter2/grandpa-shen.webp",
       imageAlt: "Portrait of Grandpa Shen, a retired woodcarver",
-      perspective: "Heritage · Neighborhood memory",
+      perspective: "Daily life · Neighborhood memory",
       dialogue: [
-        "I carved window screens for half of the houses on this lane.",
-        "When a carved beam is torn out, it does not come back.",
-        "My neighbors move away because rents rise, not because they stopped loving this place.",
-        "Repair the houses, yes. But keep the beams, the courtyards and the people.",
-        "A street can look old and still be dead. I want it to stay alive and still be ours.",
+        "I carved window screens for half the houses on this lane.",
+        "I love these houses, but my knees hurt every winter because the walls are so cold.",
+        "My neighbors move away because living here is hard, not because they stopped loving it.",
+        "Fix the pipes and the wiring. But please do not take out the beams and the courtyard.",
+        "A street can look old and still be empty. I want it to stay lived in.",
       ],
     },
   ],
@@ -67,46 +69,46 @@ const chapter2 = {
   policies: [
     {
       id: "modernize",
-      effects: { economy: 15, heritage: -20, public: -5 },
+      effects: { economy: 10, heritage: -20, public: 5 },
       result: {
-        headline: "The old town is rebuilt for visitors",
+        headline: "The old town is fully modernized",
         summary:
-          "Homes are fully modernized and shopfronts open quickly. Investment arrives, but original carvings and courtyards are lost and long-time residents feel pushed out.",
+          "Homes are rebuilt with modern plumbing and wiring, and investment arrives. Living conditions improve, but carved beams and courtyards are lost and the lane starts to look like every other street.",
+      },
+      image: "/images/chapter2/resident-home.webp",
+      priority: "Full modernization",
+      title: "Approve full modernization",
+      description: "Allow the developer to rebuild all forty homes to modern standards.",
+      tradeoff: "Brings comfort and investment, but erases much of the original character.",
+    },
+    {
+      id: "preservation",
+      effects: { economy: -5, heritage: 10, public: 5 },
+      result: {
+        headline: "Preservation-first plan approved",
+        summary:
+          "Homes get new pipes and wiring, but beams, facades and courtyards must be kept. Heritage and resident trust improve, while slower work and higher costs hold back the district's economy.",
       },
       image: "/images/chapter2/ms-zhou.webp",
-      priority: "Modernization",
-      title: "Approve full modernization",
-      description: "Allow developers to rebuild old-town homes to modern standards.",
-      tradeoff: "Brings investment and safer homes, but erases much of the original character.",
-    },
-    {
-      id: "guidelines",
-      effects: { economy: 5, heritage: 10, public: 5 },
-      result: {
-        headline: "Renovation follows heritage rules",
-        summary:
-          "Developers may renovate only if they keep facades, beams and courtyards. Heritage and trust improve, while stricter rules slow projects and raise costs.",
-      },
-      image: "/images/chapter2/pingjiang-lane.webp",
-      priority: "Balanced renewal",
-      title: "Renovate with heritage guidelines",
+      priority: "Preservation-first",
+      title: "Approve a preservation-first plan",
       description:
-        "Require developers to preserve key features and hire local craftspeople.",
-      tradeoff: "Protects character and local jobs, but adds cost and slows the pace of repair.",
+        "Allow upgrades to plumbing and wiring while protecting beams, facades and courtyards.",
+      tradeoff: "Protects character and improves homes, but costs more and moves slowly.",
     },
     {
-      id: "restore",
-      effects: { economy: -10, heritage: 20, public: 5 },
+      id: "reject",
+      effects: { economy: -5, heritage: 20, public: -10 },
       result: {
-        headline: "The old town is restored by hand",
+        headline: "The renovation is rejected",
         summary:
-          "The city funds traditional restoration and pauses new commercial building. Heritage is protected, but repairs are slow and the district earns less.",
+          "The council rejects the proposal and keeps every home as it is. Heritage is protected, but families keep living in damp, cold houses and many residents feel ignored.",
       },
       image: "/images/chapter2/grandpa-shen.webp",
-      priority: "Preservation",
-      title: "Pause building and restore traditionally",
-      description: "Fund hand restoration of the old homes and freeze new commercial projects.",
-      tradeoff: "Protects heritage the most, but costs public money and delays safer housing.",
+      priority: "No renovation",
+      title: "Reject the renovation",
+      description: "Turn down the proposal and leave all forty homes unchanged.",
+      tradeoff: "Protects heritage the most, but leaves living conditions unsolved.",
     },
   ],
 };

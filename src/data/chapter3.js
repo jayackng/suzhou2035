@@ -1,58 +1,60 @@
 // CLASS 8: Chapter 3 copies the chapter2.js structure and replaces the content.
+// Follows the Part B plan: read an investment pitch, tour the proposed site,
+// talk to a small business owner and a foreign investor.
 // DRAFT CONTENT: replace the story, characters, policies and images with your own.
 const chapter3 = {
   id: 3,
   title: "Industry & Innovation",
 
   report: {
-    title: "Innovation District Briefing",
+    title: "Investment Pitch",
     summary:
-      "Suzhou's industrial park is attracting robotics and software companies, but the small family workshops nearby say they cannot compete for land, workers or contracts.",
+      "A foreign robotics company wants to rezone a block near the industrial park for a research campus. It promises high-skill jobs, but the block is home to small family businesses that have operated there for decades.",
     findings: [
-      { label: "Forty new firms", text: "opened in the tech district this year" },
-      { label: "One in three", text: "family workshops has lost a long-term client" },
+      { label: "Two hundred", text: "high-skill jobs promised within three years" },
+      { label: "Twelve", text: "small local businesses on the proposed site" },
       { label: "Twelve months", text: "of rising land prices around the park" },
     ],
     note:
-      "Suzhou's future depends on new industries, but also on the businesses that built its reputation. Visit the district and hear from both sides before choosing a policy.",
+      "Suzhou's future depends on new industries, but also on the businesses that built its reputation. Tour the proposed site and hear from both sides before choosing a policy.",
   },
 
   scene: {
-    title: "Innovation Park",
-    location: "Industrial park · Field observation",
-    image: "/images/chapter3/innovation-park.webp",
-    imageAlt: "A glass robotics campus beside a row of small brick family workshops",
+    title: "Proposed Site",
+    location: "Industrial park edge · Site tour",
+    image: "/images/chapter3/proposed-site.webp",
+    imageAlt: "A block of small brick workshops beside a modern glass research building",
     observation:
-      "Glass offices and delivery robots line one side of the street. On the other, a loom workshop keeps its doors open to catch the light. The two buildings are only a few meters apart, but the signs on the doors are in different worlds.",
+      "On one side, glass offices and delivery robots. On the other, a loom workshop keeps its doors open for the light, and a noodle shop is serving lunch. The two sides are a few meters apart, and the rezoning line would run between them.",
   },
 
   characters: [
     {
-      name: "Dr. Lu",
-      role: "Robotics Startup Founder",
-      image: "/images/chapter3/dr-lu.webp",
-      imageAlt: "Portrait of Dr. Lu, a robotics startup founder",
-      perspective: "Innovation · High-skill jobs",
-      dialogue: [
-        "We chose Suzhou because the suppliers, engineers and factories are all within an hour.",
-        "In two years we could hire two hundred people here.",
-        "Companies like ours go where land is ready and approvals are fast.",
-        "If Suzhou slows down, we will build the next factory in another city.",
-        "Back us with land and clear permits, and we will train local workers, not only import them.",
-      ],
-    },
-    {
       name: "Mr. Gu",
-      role: "Family Textile Workshop Owner",
+      role: "Small Business Owner · Family textile workshop",
       image: "/images/chapter3/mr-gu.webp",
       imageAlt: "Portrait of Mr. Gu, a family textile workshop owner",
       perspective: "Local business · Craft skills",
       dialogue: [
         "My father started this workshop, and my daughter learned the looms here.",
-        "Since the park opened, my landlord has raised the rent twice.",
+        "If the block is rezoned, our rent will double, and we cannot afford that.",
         "Our customers want hand-finished fabric. That cannot be done by a robot.",
         "I am not against new companies. I just do not want to be the price we pay for them.",
-        "Help us upgrade our equipment, and the old and the new can grow in the same street.",
+        "Give us time and support to upgrade, and the old and the new can grow together.",
+      ],
+    },
+    {
+      name: "Mr. Andersen",
+      role: "Foreign Investor",
+      image: "/images/chapter3/mr-andersen.webp",
+      imageAlt: "Portrait of Mr. Andersen, a foreign investor",
+      perspective: "Investment · High-skill jobs",
+      dialogue: [
+        "We chose Suzhou because the suppliers, engineers and factories are all close together.",
+        "In three years we could hire two hundred people here.",
+        "A research campus needs a large, connected site. We cannot build it in small pieces.",
+        "If this falls through, we will look at other cities. That is the honest truth.",
+        "We are open to a smaller version if it still gives us enough room to start.",
       ],
     },
   ],
@@ -66,46 +68,46 @@ const chapter3 = {
 
   policies: [
     {
-      id: "campus",
+      id: "rezone",
       effects: { environment: -5, economy: 20, heritage: -5, public: -10 },
       result: {
-        headline: "The tech campus expands fast",
+        headline: "The full rezoning is approved",
         summary:
-          "Land and permits go to the new campus. Investment and high-skill jobs surge, but workshop rents rise and many small businesses lose their space.",
+          "The whole block is cleared for the research campus. Investment and high-skill jobs surge, but the small businesses lose their space and many residents feel left behind.",
       },
-      image: "/images/chapter3/dr-lu.webp",
-      priority: "Tech growth",
-      title: "Subsidize the tech campus",
-      description: "Offer land and fast approvals to large technology companies.",
-      tradeoff: "Maximizes growth, but pushes local workshops out.",
+      image: "/images/chapter3/mr-andersen.webp",
+      priority: "Full rezoning",
+      title: "Approve the rezoning",
+      description: "Rezone the whole block for the foreign research campus.",
+      tradeoff: "Maximizes growth, but displaces the local businesses on the site.",
     },
     {
-      id: "mixed",
-      effects: { economy: 10, heritage: 0, public: 5 },
+      id: "scaled",
+      effects: { economy: 10, public: 5 },
       result: {
-        headline: "A shared district is approved",
+        headline: "A scaled-down campus is approved",
         summary:
-          "New and old businesses share the district, with rent protection for existing workshops. Growth is steady, but slower than a campus-only plan.",
+          "Half of the block is rezoned and the workshops keep protected leases. Growth is steady, but smaller than the investor wanted.",
       },
-      image: "/images/chapter3/innovation-park.webp",
+      image: "/images/chapter3/proposed-site.webp",
       priority: "Shared growth",
-      title: "Create a mixed-use innovation zone",
-      description: "Reserve space and capped rents for existing local businesses.",
-      tradeoff: "Keeps local business alive, but slows the arrival of big companies.",
+      title: "Approve a scaled-down version",
+      description: "Rezone half the block and protect leases for existing businesses.",
+      tradeoff: "Keeps local business alive, but risks the investor walking away.",
     },
     {
-      id: "upgrade",
-      effects: { environment: 5, economy: -5, heritage: 5, public: 15 },
+      id: "reject",
+      effects: { economy: -15, heritage: 5, public: 5 },
       result: {
-        headline: "Local workshops upgrade first",
+        headline: "The investment is rejected",
         summary:
-          "The city funds new equipment and training for existing workshops. Residents feel supported and craft skills are kept, but outside investment waits.",
+          "The council turns the proposal down to protect existing businesses. Residents feel heard, but the high-skill jobs go to another city and the economy slows.",
       },
       image: "/images/chapter3/mr-gu.webp",
       priority: "Local first",
-      title: "Upgrade local workshops first",
-      description: "Fund equipment and digital training before approving new campuses.",
-      tradeoff: "Supports residents and craft skills, but delays outside investment.",
+      title: "Reject the investment",
+      description: "Decline the rezoning and leave the block as it is.",
+      tradeoff: "Protects local businesses, but loses the jobs and the investment.",
     },
   ],
 };
