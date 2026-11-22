@@ -1205,3 +1205,12 @@ button:disabled {
   background: rgb(28 45 37 / 90%);
   box-shadow: 0 16px 48px rgb(0 0 0 / 30%);
 }
+
+/* CLASS 8: Restart and Continue sit side by side on the result screen. */
+.policy-result__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}

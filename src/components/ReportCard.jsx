@@ -2,7 +2,7 @@
 import React from "react";
 
 // Receive report content and a navigation function through props.
-function ReportCard({ report, onContinue }) {
+function ReportCard({ report, chapterNumber, chapterTitle, sceneTitle, onContinue }) {
   // Return the report and mission layouts as one screen.
   return (
     // report-layout places the report beside the mission card.
@@ -54,10 +54,10 @@ function ReportCard({ report, onContinue }) {
       {/* The mission card explains the player's task and next action. */}
       <aside className="mission-card">
         {/* Display the current chapter number. */}
-        <p className="screen-eyebrow">Chapter 01</p>
+        <p className="screen-eyebrow">Chapter {String(chapterNumber).padStart(2, "0")}</p>
 
         {/* Display the chapter theme. */}
-        <h2>Water & Environment</h2>
+        <h2>{chapterTitle}</h2>
 
         {/* Explain what the player should do before leaving the report. */}
         <p>
@@ -67,7 +67,7 @@ function ReportCard({ report, onContinue }) {
 
         {/* Run the onContinue callback supplied by ChapterOne. */}
         <button type="button" onClick={onContinue}>
-          Visit Shantang Canal →
+          Visit {sceneTitle} →
         </button>
       </aside>
     </section>

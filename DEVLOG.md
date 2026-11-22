@@ -96,3 +96,42 @@ State (`meters`) lives in the parent. `StatusMeters` and `PolicyResult` receive 
 **Solutions:** `handlePolicyConfirm` returns early if a decree is already confirmed, and `handlePolicySelect` ignores clicks after confirmation. `applyPolicyEffects` builds a new array, so `startingMeters` stays intact and Restart can restore it. For the push, I checked a fresh clone of the repo, found the missing files, and pushed them.
 
 **Improvement for next time:** Heritage doesn't change in Chapter 1. Later chapters should have policies that affect all four meters, and the game should carry the final meter values into Chapter 2 instead of resetting.
+
+---
+
+## Log #8: Reusable ChapterScreen & Shared Game State
+**Goal:** Turn the one-off Chapter 1 screen into a reusable ChapterScreen so every chapter shares one framework, and carry the city meters from chapter to chapter.
+
+**What I Did:** Renamed `ChapterOne` to `ChapterScreen` and removed every hard-coded Chapter 1 detail from it. Each chapter now lives in its own data file (`chapter1.js`, `chapter2.js`, `chapter3.js`) with the same shape: `report`, `scene`, `characters` (an array of two), `decision` and `policies`. `gameChapters.js` imports them all into one array. I moved the four meters up into `App`, so they belong to the whole game instead of one chapter. I wrote Chapter 2 (Old Town & Heritage) and Chapter 3 (Industry & Innovation) with the same structure, and the Chapter Hub now shows finished chapters as completed and locks the ones ahead.
+
+**Shared state vs. local state:** Shared state lives in `App`: the `meters` and `currentChapterIndex`. Local state lives in `ChapterScreen`: `currentStep`, `selectedPolicy`, `isPolicyConfirmed` and the meters from the moment the chapter opened. Only `App` changes the meters, and `ChapterScreen` asks it to through callbacks.
+
+**Code excerpt (CLASS 8):**
+```jsx
+// App.jsx: shared state and the callbacks that change it
+const [meters, setMeters] = useState(initialMeters);
+const [currentChapterIndex, setCurrentChapterIndex] = useState(0);
+
+function handleApplyPolicy(policy) {
+  setMeters((previous) => applyPolicyEffects(previous, policy.effects));
+}
+function handleRestoreMeters(baselineMeters) {
+  setMeters(baselineMeters);
+}
+
+<ChapterScreen
+  key={currentChapterIndex}
+  chapter={gameChapters[currentChapterIndex]}
+  meters={meters}
+  onApplyPolicy={handleApplyPolicy}
+  onRestoreMeters={handleRestoreMeters}
+  onNextChapter={() => setCurrentChapterIndex((i) => i + 1)}
+/>
+```
+The `key={currentChapterIndex}` gives each chapter a fresh local state, so Chapter 2 opens on its report screen with no policy selected, while the meters carry over because they live in `App`.
+
+**Challenges:** If a player signed a decree and then clicked "Chapter Hub" instead of Continue, the meters kept the decree's changes. Coming back and signing again would have stacked the effects on top.
+
+**Solutions:** `ChapterScreen` remembers the meters from when the chapter opened (`useState(() => meters)`). Leaving the chapter after signing, or pressing Restart, calls `onRestoreMeters` with that saved baseline, so only the current chapter resets and earlier chapters keep their results.
+
+**Improvement for next time:** Add the Resume logic so the hub can return a player to the exact screen they left. Right now going back to the hub restarts that chapter from its report. I also want to replace the placeholder images in Chapters 2 and 3 with my own artwork.

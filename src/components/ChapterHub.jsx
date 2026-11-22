@@ -1,9 +1,9 @@
 import React from "react";
-import chapters from "../data/chapters";
 import ChapterCard from "./ChapterCard";
 
 // ChapterHub receives navigation functions from App instead of owning screen state.
-function ChapterHub({ onBack, onSelectChapter }) {
+// CLASS 8: App now decides which chapters are open, so the list arrives as a prop.
+function ChapterHub({ chapters, onBack, onSelectChapter }) {
   return (
     <main className="hub-screen">
       <header className="game-topbar">
@@ -23,12 +23,12 @@ function ChapterHub({ onBack, onSelectChapter }) {
 
         <div className="chapter-list">
           {/* map() creates one ChapterCard for every object in the data array. */}
-          {chapters.map((chapter) => (
+          {chapters.map((chapter, index) => (
             /* key helps React identify each card when the list changes. */
             <ChapterCard
               key={chapter.id}
               chapter={chapter}
-              onSelect={onSelectChapter}
+              onSelect={() => onSelectChapter(index)}
             />
           ))}
         </div>

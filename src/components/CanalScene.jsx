@@ -2,7 +2,7 @@
 import React from "react";
 
 // Receive scene data and two navigation functions through props.
-function CanalScene({ scene, onBack, onContinue }) {
+function CanalScene({ scene, nextName, onBack, onContinue }) {
   // Return the complete field-visit screen.
   return (
     // Reuse the shared story-card style and add a scene-specific class.
@@ -13,7 +13,7 @@ function CanalScene({ scene, onBack, onContinue }) {
         <img src={scene.image} alt={scene.imageAlt} />
 
         {/* The caption tells the player where this field visit takes place. */}
-        <span className="scene-card__caption">Field visit · Shantang Canal</span>
+        <span className="scene-card__caption">Field visit · {scene.title}</span>
       </div>
 
       {/* This container holds the scene text and navigation buttons. */}
@@ -40,7 +40,7 @@ function CanalScene({ scene, onBack, onContinue }) {
 
           {/* Run the onContinue callback supplied by ChapterOne. */}
           <button type="button" className="story-button" onClick={onContinue}>
-            Continue to Mr. Feng →
+            Continue to {nextName} →
           </button>
         </div>
       </div>
